@@ -13,15 +13,18 @@
 import * as types from '../constants/actionTypes'
 import axios from 'axios';
 
+//toggle between buzzer and game board mode
 export const toggleBoard = () => ({
   type: types.TOGGLE_BOARD
 })
 
+//pass characters from buzzer screen to state
 export const inputUser = (event) => ({
   type: types.INPUT_USER,
   payload: event.target.value
 })
 
+// reset the state of all buzzers
 export const clearBuzzers = () => (dispatch, getState) => {
   const url = '/api/clearBuzzers'
   axios.get(url)
@@ -35,6 +38,7 @@ export const clearBuzzers = () => (dispatch, getState) => {
     })
 };
 
+//Main form of interaction for the buzzer clients
 export const pressBuzzer = () => (dispatch, getState) => {
   let state = getState();
   let currentPlayer = state.trivia.currentPlayer;
@@ -55,6 +59,7 @@ export const pressBuzzer = () => (dispatch, getState) => {
       })
     })
 }
+
 
 export const awardPoints = () => (dispatch, getState) => {
   const state = getState();
@@ -150,13 +155,13 @@ export const submitLogin = () => (dispatch, getState) => {
     })
 }
 
+//
 export const setGameLoopTrue = () => ({
   type: types.SET_GAMELOOP
 })
 
 // this is called in the game loop 
 // to keep game state updated with the server
-
 export const getPlayerData = (e) => (dispatch) => {
   const url = '/api/getplayers'
   axios.get(url)
@@ -175,6 +180,7 @@ export const flipCard = (event) => ({
   payload: event,
 });
 
+//pass answer key by key to state
 export const inputAnswer = (event) => ({
   type: types.INPUT_ANSWER,
   payload: event,
@@ -184,6 +190,7 @@ export const submitAnswer = (input) => ({
   type: types.SUBMIT_ANSWER,
   payload: input,
 });
+
 
 const axiosGet = (dispatch) => {
   let categoryId = randomNum();
@@ -207,17 +214,6 @@ export const startGame = () => (dispatch) => {
   for(let i = 0; i < 4; i++){
     axiosGet(dispatch)
   }
-  // new Promise((resolve,reject) => {
-  //   axiosGet
-  // })
-  // .then()
-  // .then()
-  // .then()
-  // .then(function(resolve, reject){
-  //   dispatch({
-  //     type: types.START_GAME,
-  //     payload: resolve
-  //   })
-  // })
+
   
 }

@@ -5,15 +5,15 @@ import PlayerComonent from '../components/PlayerComponent.jsx'
 import * as actions from '../actions/actions';
 
 const mapStateToProps = (store) => ({
-    totalScore: store.trivia.totalScore,
-    questionData: store.trivia.questionData,
-    currentAnswer: store.trivia.currentAnswer,
+    totalScore: store.trivia.totalScore,        //this isn't really used
+    questionData: store.trivia.questionData,    //
+    currentAnswer: store.trivia.currentAnswer,  
 
-    currentUserBoard: store.trivia.currentUserBoard,
-    currentPlayer: store.trivia.currentPlayer,
-    disableUserInput: store.trivia.disableUserInput,
-    currentPlayers: store.trivia.currentPlayers,
-    gameLoopActive: store.trivia.gameLoopActive,
+    currentUserBoard: store.trivia.currentUserBoard,// bool - is the current user the board
+    currentPlayer: store.trivia.currentPlayer,      // str - current player 
+    disableUserInput: store.trivia.disableUserInput,// bool - used to disable user input after they have a name
+    currentPlayers: store.trivia.currentPlayers,    // array - mirror of game state data that is on server
+    gameLoopActive: store.trivia.gameLoopActive,    // bool - have we kicked off the gameLoop yet?
 })
 
 
@@ -46,29 +46,31 @@ class MainContainer extends React.Component {
 
     render() {
 
-        //If we don't have a name for the player, querey the server if we have anything for them
+        //If we don't have a name for the player, 
+        //querey the server if we have anything for them
+        //Will check for cookie and assign a name if it does
         if (this.props.currentPlayer === '') {
             this.props.getLoginData();
         }
 
 
-        let questionData = this.props.questionData;
-        let categories = [];
-        let userInputClass = '';
-        let currentPlayers;
-        let playersArray;
-        let toggleBoardClass = 'hidden';
-        let hideLoginClass = 'hidden';
-
+        let questionData = this.props.questionData; // Clue/Question data from state/api to populate cards
+        let categories = [];                        // Display array - this is populated with column components
+        let userInputClass = '';                    // Class to disable input when username is entered
+        let currentPlayers;                         // mirrors server data for display
+        let playersArray;                           // Display array - to be fill with player components
+        let toggleBoardClass = 'hidden';            
+        let hideLoginClass = 'hidden';              // Classes for hiding controls
 
         if (this.props.currentUserBoard) { //Current user is the game board
-            // questionData.forEach((element, i) => {
-            //     // console.log(element);
-            //     const newColumn = <ColumnComponent category={element} key={element.name} />
-            //     categories.push(newColumn);
-            // });
+
             questionData.forEach((category, i) => {
-                const newColumn = <ColumnComponent flipCard={this.props.flipCard} columnId={i} category={category} key={category.name} />
+                const newColumn = <ColumnComponent 
+                flipCard={this.props.flipCard} 
+                columnId={i} 
+                category={category} 
+                key={category.name} 
+                />
                 categories.push(newColumn);
             });
 
@@ -95,13 +97,19 @@ class MainContainer extends React.Component {
                 userInputClass = "disableUserInput"
             }
             //only show toggle board for user asdf
-            if (this.props.currentPlayer == "asdf") {
-                toggleBoardClass = '';
-            }
+            // took this out so future users can easily access both boards.
+            // if (this.props.currentPlayer == "asdf") {
+            //     toggleBoardClass = '';  
+            // }
+
+            //hide log in fields once user has a login name
             if (this.props.currentPlayer == '')
                 hideLoginClass = ''
-
         }
+
+        // For two different returns based on condition, you guys can potentially work on refactoring 
+        // the codes and put them into two separate different react components files
+        // that would make the mainContainer codes much more readable and easy to manage.
         if (this.props.currentUserBoard) {
             return (
                 <div className='main-container-div'>
@@ -128,7 +136,7 @@ class MainContainer extends React.Component {
                             autoComplete='off'
                             value={this.props.currentAnswer} />
                         <button id="submit-answer" onClick={this.props.submitAnswer}>submit</button>
-                        <span id="answerField"></span>
+                        <span id="correctAnswerField"></span>
 
 
                     </div>

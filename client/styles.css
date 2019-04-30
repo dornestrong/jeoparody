@@ -35,9 +35,14 @@ html {
     background-color: blue;
 }
 
+#correctAnswerField{
+    font-size: 3em;
+    color: red;
+}
+
 .clue-display {
     display:none;
-    height: 400px;
+    height: 500px;
     width: 800px;
     background-color: lightskyblue;
     position: fixed;
