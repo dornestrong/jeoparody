@@ -59,7 +59,7 @@ const initialState = {
                         value: 400
                     }, {
                         clue: "Solve this riddle: When I am wet, I am alive. When I am dry, I am tossed away. I persist on tables, walls and doors",
-                        answer: "dry erase marker",
+                        answer: "Dry Erase Marker",
                         state: "fresh",
                         value: 500
                     },

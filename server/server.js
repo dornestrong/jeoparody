@@ -39,7 +39,6 @@ app.use(bodyParser.json());
 
 
 app.get('/api/getLoginData', cookieController.verifyCookie, (req, res) => {
-  console.log("Is this route getting hit")
 });
 
 app.post('/api/signup', userController.createUser, cookieController.setCookie, (req, res) => {

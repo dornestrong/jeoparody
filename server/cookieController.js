@@ -5,6 +5,8 @@ const cookieParser = require('cookie-parser');
 
 const cookieController = {};
 
+
+// cookie middleware which assigns the username as a cookie. Cookie is assigned after signup or login
 cookieController.setCookie = (req, res, next) => {
   console.log("Set Cookie middleware initiated")
   let verifyQuery = `SELECT * FROM users WHERE username = '${req.body.username}' AND password = crypt('${req.body.password}', password)`
@@ -20,9 +22,9 @@ cookieController.setCookie = (req, res, next) => {
       next()
     });
   });
-  console.log("Before next in setCookie")
 };
 
+// cookie middleware which verifies if cookie exists, is activated upon get request to login page
 cookieController.verifyCookie = (req, res, next) => {
   if(!req.cookies.loginCookie) {
     res.send("")
