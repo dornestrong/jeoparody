@@ -5,6 +5,7 @@ const client = new pg.Client(conString);
 
 const userController = {}
 
+//user verification middleware 
 userController.verifyUser = (req, res, next) => {
   console.log(`Trying to verify user`);
   console.log(req.body)
@@ -22,7 +23,6 @@ userController.verifyUser = (req, res, next) => {
         } else {
           console.log(`Invalid Username/Password`);
           res.locals.err = 'Invalid username/password'
-
           res.status(444)
         }
       }
@@ -34,6 +34,7 @@ userController.verifyUser = (req, res, next) => {
   })
 }
 
+//user Creation middleware
 userController.createUser = (req, res, next) => {
   console.log("create user middleware initiated");
   if (req.body.username && req.body.password) {
