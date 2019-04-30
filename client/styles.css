@@ -16,6 +16,14 @@ html {
     border-radius: 5px
 }
 
+.boardControlButtons{
+    padding: 30px;
+    background: lightblue;
+    font-weight: bold;
+    font-size: 20;
+    border-radius: 5px
+}
+
 #answer-input{
     width: 700px;
     font-size: 1.5em;
@@ -119,6 +127,14 @@ html {
     float: right;
 }
 
+.hidden{
+    display: none;
+}
+
+.createUserBtn,.toggleBoard{
+    float: right;
+}
+
 .disableUserInput{
     pointer-events: none;
 }
@@ -136,10 +152,11 @@ html {
     height: 120px;
     width: 100x;
     margin: 20px;
-    /* border: solid 2px black; */
+    font-size: 2em;
     background-color: rgb(4, 4, 194);
     text-align: center;
     color:white;
+    border-radius: 40px;
 }
 
 .buzzed{

@@ -42,6 +42,10 @@ export const pressBuzzer = () => (dispatch, getState) => {
   let url = `/api/hitBuzzer?name=${currentPlayer}`;
   axios.get(url)
     .then(response => {
+
+  // ToDo: Add random
+
+
       return response.data
     }).then(data => {
       console.log('Buzzer Data', data)
@@ -95,6 +99,25 @@ export const getLoginData = () => (dispatch, getState) => {
         payload: data
       })
     })
+}
+
+export const createUser = () => (dispatch,getState) => {
+  const state = getState();
+  const body = {
+    username: state.trivia.username,
+    password: state.trivia.password
+  }
+  const url = "/api/signup"
+  axios.post(url, body)
+  .then(response => {
+    return response.data
+  }).then(data => {
+    console.log('New User Data', data)
+    dispatch({
+      type: types.CREATE_USER,
+      payload: data
+    })
+  })
 }
 
 export const inputUsername = (event) => ({
@@ -162,23 +185,39 @@ export const submitAnswer = (input) => ({
   payload: input,
 });
 
-export const startGame = () => (dispatch, getState) => {
-  let url = "http://jservice.io/api/clues?category=2";
-  // let requestHead = {
-  //   method: 'get',
-  //   mode: 'no-cors',
-  //   url: url,
-  //   header: {'Access-Control-Allow-Origin': '*',
-  //             'Content-Type': 'application/json'}
-  // }
+const axiosGet = (dispatch) => {
+  let categoryId = randomNum();
+  let url = `http://jservice.io/api/clues?category=${categoryId}`;
   axios.get(url)
     .then(response => {
       return response.data
     }).then(data => {
-      console.log('action.js: ', data)
       dispatch({
         type: types.START_GAME,
         payload: data
       })
     })
+}
+
+const randomNum = () => {
+  return Math.floor(Math.random()*11507+1)
+}
+
+export const startGame = () => (dispatch) => {
+  for(let i = 0; i < 4; i++){
+    axiosGet(dispatch)
+  }
+  // new Promise((resolve,reject) => {
+  //   axiosGet
+  // })
+  // .then()
+  // .then()
+  // .then()
+  // .then(function(resolve, reject){
+  //   dispatch({
+  //     type: types.START_GAME,
+  //     payload: resolve
+  //   })
+  // })
+  
 }

@@ -14,7 +14,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server/server.js & webpack-dev-server",
+    "dev": "webpack-dev-server",
     "devHome": "nodemon server/server.js & webpack-dev-server --port 8000 --hot --host 192.168.0.167",
     "start": "nodemon server/server.js",
     "build": "webpack",

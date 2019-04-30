@@ -35,3 +35,5 @@ export const GET_LOGIN_DATA = "GET_LOGIN_DATA";
 export const SUBMIT_LOGIN = "SUBMIT_LOGIN"
 export const INPUT_USERNAME = "INPUT_USERNAME"
 export const INPUT_PASSWORD = "INPUT_PASSWORD"
+
+export const CREATE_USER = "CREATE_USER"

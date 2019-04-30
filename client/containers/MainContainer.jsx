@@ -35,6 +35,7 @@ const mapDispatchToProps = (dispatch) => ({
 
     getLoginData: () => dispatch(actions.getLoginData()),
     submitLogin: () => dispatch(actions.submitLogin()),
+    createUser: () => dispatch(actions.createUser()),
 });
 
 
@@ -56,7 +57,8 @@ class MainContainer extends React.Component {
         let userInputClass = '';
         let currentPlayers;
         let playersArray;
-
+        let toggleBoardClass = 'hidden';
+        let hideLoginClass = 'hidden';
 
 
         if (this.props.currentUserBoard) { //Current user is the game board
@@ -92,42 +94,53 @@ class MainContainer extends React.Component {
             if (this.props.disableUserInput) {
                 userInputClass = "disableUserInput"
             }
+            //only show toggle board for user asdf
+            if (this.props.currentPlayer == "asdf") {
+                toggleBoardClass = '';
+            }
+            if (this.props.currentPlayer == '')
+                hideLoginClass = ''
+
         }
         if (this.props.currentUserBoard) {
             return (
-            <div className='main-container-div'>
+                <div className='main-container-div'>
                     <button id='newGame' onClick={this.props.startGame}>New Game</button>
-                    <button onClick={this.props.toggleBoard}>Toggle Board</button>
-                    <button onClick={this.props.awardPoints}>Award Points</button>
-                    <button onClick={this.props.clearBuzzers}>Clear Buzzers</button>
+                    <button className="toggleBoard" onClick={this.props.toggleBoard}>Toggle Board</button>
+                    <button className="boardControlButtons" onClick={this.props.awardPoints}>Award Points</button>
+                    <button className="boardControlButtons" onClick={this.props.clearBuzzers}>Clear Buzzers</button>
 
                     <div id="playerColumn">
                         <h3>Players:</h3>
                         {playersArray}
                     </div>
 
-                <h1 id="totalScore">Total Score: {this.props.totalScore}</h1>
-                <div className="column-container">
-                    {categories}   
-                </div>
+                    {/* <h1 id="totalScore">Total Score: {this.props.totalScore}</h1> */}
+                    <div className="column-container">
+                        {categories}
+                    </div>
 
-                <div className='clue-display'>
-                    <div id="question">This is where the question will go</div>
-                        <input id="answer-input"
+                    <div className='clue-display'>
+                        <div id="question">This is where the question will go</div>
+                        <br></br>
+                        What/Where/Who is:<input id="answer-input"
                             onChange={e => this.props.inputAnswer(e.target.value)}
+                            autoComplete='off'
                             value={this.props.currentAnswer} />
                         <button id="submit-answer" onClick={this.props.submitAnswer}>submit</button>
-                    
+                        <span id="answerField"></span>
 
-                </div>
 
-            </div >
+                    </div>
+
+                </div >
             )
         } else {  //User is buzzer
             return (
                 <div>
-                    <button onClick={this.props.toggleBoard}>Toggle Board</button>
-                    <form id="loginform" onSubmit={(e) => {
+                    <button className={toggleBoardClass} onClick={this.props.toggleBoard}>Toggle Board</button>
+                    <button className={`createUserBtn ${hideLoginClass}`} onClick={this.props.createUser}>Create User</button>
+                    <form className={hideLoginClass} id="loginform" onSubmit={(e) => {
                         e.preventDefault();
                         console.log(e.target.username.value);
                         if (e.target.username.value != "")
@@ -135,12 +148,13 @@ class MainContainer extends React.Component {
                     }}>
                         <input type="text" id="username" placeholder="Username" onChange={this.props.inputUsername} />
                         <input type="text" id="password" placeholder="Password" onChange={this.props.inputPassword} />
-                        <input type="submit" />
+                        <input type="submit" value="Login" />
                     </form>
                     <form onSubmit={(e) => {
                         e.preventDefault();
                         console.log(e.target.playerInput.value);
-                        if (e.target.playerInput.value != "")
+                        const input = e.target.playerInput.value;
+                        if (input != "" )
                             this.props.pressBuzzer()
                     }} >
                         <input id="playerInput"
