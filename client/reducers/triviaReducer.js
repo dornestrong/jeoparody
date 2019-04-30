@@ -32,6 +32,8 @@ const initialState = {
     //question/game data
     questionData:
         // Need to add value for player answers to each card object
+        // these are testing data. questionData state would usually start from empty array: []
+        // questionData will also be the data structure that should be used to saved gameData into database
         [
             {
                 name: "Codesmith Trivia",
@@ -356,14 +358,14 @@ const triviaReducer = (state = initialState, action) => {
                     value: point
                 })
             }
-            console.log('new column',newCat);
+
             let questionData = state.questionData.slice();
             if(state.questionData.length === 4) {
                 questionData = [];
                 totalScore = 0;
             }
             questionData.push(newCat);
-            console.log('this is inside triviaReducer:  ', questionData)
+
             return {
                 ...state,
                 questionData,
@@ -371,8 +373,6 @@ const triviaReducer = (state = initialState, action) => {
             }
 
         case types.FLIP_CARD:
-            console.log('--------------------------------------------')
-            console.log('flipcard payload:', action.payload);
 
             let column = action.payload[0];
             let card = action.payload[1];
@@ -394,18 +394,21 @@ const triviaReducer = (state = initialState, action) => {
         case types.SUBMIT_ANSWER:
             console.log('Answer Submitted');
             // first, take the input value from input box
-            // second, check the input answer is equal to the right answer or not
+            // second, check whether the input answer is equal to the right answer or not
+            // third, change variable check to true and false accordingly
 
             column = state.questionClue[0];
             card = state.questionClue[1];
             let totalScore = state.totalScore;
-            let check;
             let givenAnswer = state.currentAnswer;
             let correctAnswer = state.questionData[column].clues[card]['answer'];
+            let check;
 
+
+            // get red of all the extra '< * > /' that are in the user-input answer and API-requested correct answer
             let givenMassaged = massageAnswers(givenAnswer);
             let correctMassaged = massageAnswers(correctAnswer)
-            if (givenMassaged === correctMassaged) { // only for string type answer, still need condition for number and boolean
+            if (givenMassaged === correctMassaged) { // only for string type answer, still need condition for number and boolean. I know you guys can solve it! :P
                 console.log('correct!');
                 check = true;
             } else {
