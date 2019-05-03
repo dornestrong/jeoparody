@@ -57,7 +57,6 @@ app.post('/game', gameController.saveGame, (req, res) => {
   res.status()
 })
 
-
 //call from client to get game status for others
 app.get('/api/getPlayers', (req, res) => {
   res.send(gameState.players);
