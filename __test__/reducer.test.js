@@ -190,3 +190,18 @@ test("Inputting username should update the state username",() => {
     }
     expect(reducer(initialState, action).username).toBe("NoobMaster69");
 })
+
+test("Inputting username should update the state username",() => {
+    const action = {
+        type: "INPUT_USERNAME",
+        payload: "NoobMaster69"
+    }
+    expect(reducer(initialState, action).username).toBe("NoobMaster69");
+})
+test("Adding login data should disable the user input",() => {
+    const action = {
+        type: "GET_LOGIN_DATA",
+        payload: "NoobMaster69"
+    }
+    expect(reducer(initialState, action).disableUserInput).toBe(true);;
+})
