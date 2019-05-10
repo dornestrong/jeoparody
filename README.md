@@ -28,3 +28,15 @@ Biggest suggestions would be:
 * better answer matching - look into fuzzy matching
 * There's a issue with login work flow, probably just needs error handling
 
+## For Windows Developer:
+
+If you are having a hard time run nodemon and webpack-dev-server at the same time, you can install the npm `concurrently` package. Go to your package.json file and modifies within your 'scripts' in this way: 
+
+    ''scripts': {
+        ...
+        "dev": "concurrently \"webpack-dev-server\" \"nodemon server/server.js\"",
+        ...
+    }
+
+Hope that makes Windows machine developers life easier.
+

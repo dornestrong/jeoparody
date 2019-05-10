@@ -4,6 +4,8 @@ const client = new pg.Client(conString);
 
 const cookieController = {};
 
+
+// cookie middleware which assigns the username as a cookie. Cookie is assigned after POST signup or login
 cookieController.setCookie = (req, res, next) => {
   if(res.locals.err) return next();
   console.log("Set Cookie middleware initiated")
@@ -22,6 +24,7 @@ cookieController.setCookie = (req, res, next) => {
   });
 };
 
+// cookie middleware which verifies if cookie exists, is activated upon get request to login page
 cookieController.verifyCookie = (req, res, next) => {
   if(!req.cookies) {
     console.log("No Cookie found");
@@ -31,7 +34,7 @@ cookieController.verifyCookie = (req, res, next) => {
   }
   return next();
 }
-
+//SSID Cookie deemed unncessary
 // cookieController.setSSIDCookie = (req, res, next) => {
 //   if (err) console.err(err); 
 //   let setSSID = `SELECT id FROM users WHERE username = '${req.body.username}' AND password = crypt('${req.body.password}', password)`

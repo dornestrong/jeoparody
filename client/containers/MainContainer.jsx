@@ -62,11 +62,15 @@ class MainContainer extends React.Component {
         let toggleBoardClass = 'hidden';            
         let hideLoginClass = 'hidden';              // Classes for hiding controls
 
-
         if (this.props.currentUserBoard) { //Current user is the game board
 
             questionData.forEach((category, i) => {
-                const newColumn = <ColumnComponent flipCard={this.props.flipCard} columnId={i} category={category} key={category.name} />
+                const newColumn = <ColumnComponent 
+                flipCard={this.props.flipCard} 
+                columnId={i} 
+                category={category} 
+                key={category.name} 
+                />
                 categories.push(newColumn);
             });
 
@@ -101,8 +105,11 @@ class MainContainer extends React.Component {
             //hide log in fields once user has a login name
             if (this.props.currentPlayer == '')
                 hideLoginClass = ''
-
         }
+
+        // For two different returns based on condition, you guys can potentially work on refactoring 
+        // the codes and put them into two separate different react components files
+        // that would make the mainContainer codes much more readable and easy to manage.
         if (this.props.currentUserBoard) {
             return (
                 <div className='main-container-div'>
