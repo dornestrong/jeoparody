@@ -205,3 +205,10 @@ test("Adding login data should disable the user input",() => {
     }
     expect(reducer(initialState, action).disableUserInput).toBe(true);;
 })
+test("Adding login data should disable the user input",() => {
+    const action = {
+        type: "GET_LOGIN_DATA",
+        payload: "NoobMaster69"
+    }
+    expect(reducer(initialState, action).disableUserInput).toBe(true);;
+})
