@@ -251,7 +251,7 @@ const triviaReducer = (state = initialState, action) => {
 
             //"asdf" was my admin user - this was to prevent anyone from
             // creating that user via the guest/buzzer login
-            if (currentPlayer === "asdf") currentPlayer = "asdff"
+            if (currentPlayer === "asdf") currentPlayer = "asdfffff"
             return {
                 ...state,
                 currentPlayer
