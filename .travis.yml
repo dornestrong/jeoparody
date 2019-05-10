@@ -4,3 +4,10 @@ install:
 - npm install
 script:
 - npm test
+
+notifications:
+  slack:
+    matrix:
+    - codesmith-28:DxlxJPkLLRDwDAKzM4vQ1fcN
+    rooms:
+      secure: FlrAe8BYHVbxJzoaLMTP2X3CTRmASBESJCX5JDqY/3WyDx1gMvZ4vRISvhVWUxi3T2HVAaAfw8ULEuRyEXGraJeCfkd9PF37ty4RqU/Kg56X/vBgnJwaCyVXmI/e55JsZqH2VyB0/RzovfVhrP/mEIlnlKYNqyXDjg4R4NAhdI0fjzqi2LHmb+Y42xFS9QZU7m7ZxqNX/yuD/40a8P4GF2tGcy1XPcj6c0PVZ+mctNRFcDF32b3/4btnoAeETQHWDJSlX12qHZYqMvoUBAO6w1ZF7q4UyY6ASerzQvd44YcC0xwLJld5qwjEZApOnvJix8KTmckMSPLlUM+Kd9hPLDRTk7xJiGGMeFr830O3vT38MRlMLQDZu1PVnidXPn3xNiRU1cWPFL7G4elgL+5mvB5DITjYbBWEaPjC6TotbFfJY6Gn1YSzZOgUn/maxzh84FaXmvHXrKos1S0Uussceky0Gc9LNrmTRzsCRDNIciNZu9414pRnb91TDzSOZVVD+Nfo/gO6UVZBAwoY5Q/XTJ2f9H0Cdtuc+Se5XlcB8k9H/U90VbYzW3OUugkg09kVfxdNeZ+Q38ejlV14tx4hVR60cAw0xZwLt5b4HqscOpieuku0NL8QFwxSSmwJv5IVnokQzCB8tPvptqP5g2ySsqgJhtvci0tCVVqwevSkyzw=
